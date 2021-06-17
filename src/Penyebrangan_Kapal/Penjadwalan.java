@@ -1,10 +1,8 @@
 package Penyebrangan_Kapal;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Random;
@@ -13,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JLayeredPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
