@@ -237,10 +237,10 @@ public class Penjadwalan extends JFrame {
 				clearTable();
 				inisialisasi();
 				for (int i = 0; i < iterasi; i++) {
-					hitungCrossover();
-					hitungMutasi();
 					hitungFitness();
 					seleksiElitism();
+					hitungCrossover();
+					hitungMutasi();
 					tbmodel_indterb.addRow(new Object[] { i + 1, individuTerbaik + 1, fitnessJipi, jadwalTerbaik });
 					if (fitnessJipi >= thresholdJipi) {
 						System.out.println("");
