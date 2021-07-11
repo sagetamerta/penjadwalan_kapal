@@ -237,10 +237,10 @@ public class Penjadwalan extends JFrame {
 				clearTable();
 				inisialisasi();
 				for (int i = 0; i < iterasi; i++) {
-					hitungFitness();
-					seleksiElitism();
 					hitungCrossover();
 					hitungMutasi();
+					hitungFitness();
+					seleksiElitism();
 					tbmodel_indterb.addRow(new Object[] { i + 1, individuTerbaik + 1, fitnessJipi, jadwalTerbaik });
 					if (fitnessJipi >= thresholdJipi) {
 						System.out.println("");
@@ -475,27 +475,27 @@ public class Penjadwalan extends JFrame {
 				temp = temp.substring(0, 32) + "...";
 				tbmodel_child.addRow(new Object[] { c1 + 1, c[0] + "x" + c[1], temp });
 			} else {
-				int c2 = ++getChildCO;
-				System.out.println(c2 + " " + getChildCO);
-				for (int i = 0; i < maxData; i++) {
-					childCrossover[c1][i] = data[c[0]][i];
-					childCrossover[c2][i] = data[c[1]][i];
-				}
-				for (int i = oneCut, j = 0; j < maxData - oneCut; j++, i++) {
-					childCrossover[c2][i] = data[c[0]][i];
-					childCrossover[c1][i] = data[c[1]][i];
-				}
-				for (int i = c1; i <= c2; i++) {
-					System.out.println("\nChild " + i + " = ");
-					int temp2[] = new int[maxData];
-					for (int j = 0; j < maxData; j++) {
-						System.out.println(childCrossover[i][j] + " ");
-						temp2[j] = childCrossover[i][j];
-					}
-					temp = Arrays.toString(temp2);
-					temp = temp.substring(0, 32) + "...";
-					tbmodel_child.addRow(new Object[] { i + 1, c[0] + "x" + c[1], temp });
-				}
+				// int c2 = ++getChildCO;
+				// System.out.println(c2 + " " + getChildCO);
+				// for (int i = 0; i < maxData; i++) {
+				// childCrossover[c1][i] = data[c[0]][i];
+				// childCrossover[c2][i] = data[c[1]][i];
+				// }
+				// for (int i = oneCut, j = 0; j < maxData - oneCut; j++, i++) {
+				// childCrossover[c2][i] = data[c[0]][i];
+				// childCrossover[c1][i] = data[c[1]][i];
+				// }
+				// for (int i = c1; i <= c2; i++) {
+				// System.out.println("\nChild " + i + " = ");
+				// int temp2[] = new int[maxData];
+				// for (int j = 0; j < maxData; j++) {
+				// System.out.println(childCrossover[i][j] + " ");
+				// temp2[j] = childCrossover[i][j];
+				// }
+				// temp = Arrays.toString(temp2);
+				// temp = temp.substring(0, 32) + "...";
+				// tbmodel_child.addRow(new Object[] { i + 1, c[0] + "x" + c[1], temp });
+				// }
 			}
 		}
 	}
