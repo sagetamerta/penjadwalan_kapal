@@ -56,7 +56,7 @@ public class Penjadwalan extends JFrame {
 	int individuTerbaik; // nomor individu terbaik setiap iterasi
 	double thresholdJipi; // treshold yang akan diuji
 	int indexTerbaik;
-	int maxData = 160;
+	int maxData = 32;
 	int maxKapal = 32;
 	int getChildCO, ofCrossover, ofMutasi, cHalangan, popsize, iterasi, count, allPop;
 	Double cons1, cons2, cons3, cons4, cons5;
@@ -382,6 +382,67 @@ public class Penjadwalan extends JFrame {
 		}
 	}
 
+	public void hitungCrossover() {
+		String temp;
+		getChildCO = -1;
+		ofCrossover = (int) Math.round(cr * popsize);
+		System.out.println("Banyak Offspring Crossover = " + ofCrossover);
+		childCrossover = new int[ofCrossover][maxData];
+
+		while (ofCrossover - getChildCO != 1) {
+			Random random = new Random();
+			int c[] = new int[2];
+			c[0] = random.nextInt(popsize);
+			c[1] = random.nextInt(popsize);
+
+			int oneCut = random.nextInt(maxKapal);
+			System.out.println("\n" + c[0] + " | " + c[1] + " | " + oneCut);
+
+			int c1 = ++getChildCO;
+			System.out.println(c1 + " " + getChildCO);
+
+			if (ofCrossover - getChildCO == 1) {
+				for (int i = 0; i < maxData; i++) {
+					childCrossover[c1][i] = data[c[0]][i];
+				}
+				for (int i = oneCut, j = 0; j < maxData - oneCut; j++, i++) {
+					childCrossover[c1][i] = data[c[1]][i];
+				}
+				System.out.println("Child " + c1 + " = ");
+				int temp2[] = new int[maxData];
+				for (int i = 0; i < maxData; i++) {
+					System.out.println(childCrossover[c1][i] + " ");
+					temp2[i] = childCrossover[c1][i];
+				}
+				temp = Arrays.toString(temp2);
+				temp = temp.substring(0, 32) + "...";
+				tbmodel_child.addRow(new Object[] { c1 + 1, c[0] + "x" + c[1], temp });
+			} else {
+				int c2 = ++getChildCO;
+				System.out.println(c2 + " " + getChildCO);
+				for (int i = 0; i < maxData; i++) {
+					childCrossover[c1][i] = data[c[0]][i];
+					childCrossover[c2][i] = data[c[1]][i];
+				}
+				for (int i = oneCut, j = 0; j < maxData - oneCut; j++, i++) {
+					childCrossover[c2][i] = data[c[0]][i];
+					childCrossover[c1][i] = data[c[1]][i];
+				}
+				for (int i = c1; i <= c2; i++) {
+					System.out.println("\nChild " + i + " = ");
+					int temp2[] = new int[maxData];
+					for (int j = 0; j < maxData; j++) {
+						System.out.println(childCrossover[i][j] + " ");
+						temp2[j] = childCrossover[i][j];
+					}
+					temp = Arrays.toString(temp2);
+					temp = temp.substring(0, 32) + "...";
+					tbmodel_child.addRow(new Object[] { i + 1, c[0] + "x" + c[1], temp });
+				}
+			}
+		}
+	}
+
 	/* method untuk menghitung constraint */
 	public void getConstraint1(int[] array, int[] array2) {
 		for (int i = 0; i < array.length; i++) {
@@ -435,67 +496,6 @@ public class Penjadwalan extends JFrame {
 		for (int i = 0; i < array.length; i++) {
 			if (array[i] == value) {
 				cons5 = cons5 + 60;
-			}
-		}
-	}
-
-	public void hitungCrossover() {
-		String temp;
-		getChildCO = -1;
-		ofCrossover = (int) Math.round(cr * popsize);
-		System.out.println("Banyak Offspring Crossover = " + ofCrossover);
-		childCrossover = new int[ofCrossover][maxData];
-
-		while (ofCrossover - getChildCO != 1) {
-			Random random = new Random();
-			int c[] = new int[2];
-			c[0] = random.nextInt(popsize);
-			c[1] = random.nextInt(popsize);
-
-			int oneCut = random.nextInt(maxKapal);
-			System.out.println("\n" + c[0] + " | " + c[1] + " | " + oneCut);
-
-			int c1 = ++getChildCO;
-			System.out.println(c1 + " " + getChildCO);
-
-			if (ofCrossover - getChildCO == 1) {
-				for (int i = 0; i < maxData; i++) {
-					childCrossover[c1][i] = data[c[0]][i];
-				}
-				for (int i = oneCut, j = 0; j < maxData - oneCut; j++, i++) {
-					childCrossover[c1][i] = data[c[1]][i];
-				}
-				System.out.println("Child " + c1 + " = ");
-				int temp2[] = new int[maxData];
-				for (int i = 0; i < maxData; i++) {
-					System.out.println(childCrossover[c1][i] + " ");
-					temp2[i] = childCrossover[c1][i];
-				}
-				temp = Arrays.toString(temp2);
-				temp = temp.substring(0, 32) + "...";
-				tbmodel_child.addRow(new Object[] { c1 + 1, c[0] + "x" + c[1], temp });
-			} else {
-				// int c2 = ++getChildCO;
-				// System.out.println(c2 + " " + getChildCO);
-				// for (int i = 0; i < maxData; i++) {
-				// childCrossover[c1][i] = data[c[0]][i];
-				// childCrossover[c2][i] = data[c[1]][i];
-				// }
-				// for (int i = oneCut, j = 0; j < maxData - oneCut; j++, i++) {
-				// childCrossover[c2][i] = data[c[0]][i];
-				// childCrossover[c1][i] = data[c[1]][i];
-				// }
-				// for (int i = c1; i <= c2; i++) {
-				// System.out.println("\nChild " + i + " = ");
-				// int temp2[] = new int[maxData];
-				// for (int j = 0; j < maxData; j++) {
-				// System.out.println(childCrossover[i][j] + " ");
-				// temp2[j] = childCrossover[i][j];
-				// }
-				// temp = Arrays.toString(temp2);
-				// temp = temp.substring(0, 32) + "...";
-				// tbmodel_child.addRow(new Object[] { i + 1, c[0] + "x" + c[1], temp });
-				// }
 			}
 		}
 	}
