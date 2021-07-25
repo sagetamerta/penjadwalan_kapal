@@ -56,7 +56,7 @@ public class Penjadwalan extends JFrame {
 	int individuTerbaik; // nomor individu terbaik setiap iterasi
 	double thresholdJipi; // treshold yang akan diuji
 	int indexTerbaik;
-	int maxData = 32;
+	int maxData = 168;
 	int maxKapal = 32;
 	int getChildCO, ofCrossover, ofMutasi, cHalangan, popsize, iterasi, count, allPop;
 	Double cons1, cons2, cons3, cons4, cons5;
